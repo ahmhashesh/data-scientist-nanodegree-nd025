@@ -10,6 +10,7 @@ from flask import render_template, request, jsonify
 from plotly.graph_objs import Bar
 from sklearn.externals import joblib
 from sqlalchemy import create_engine
+import plotly.graph_objs as gobj
 
 
 app = Flask(__name__)
@@ -46,7 +47,7 @@ def index():
     # TODO: Below is an example - modify to extract data for your own visuals
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
-    
+    sum_col = df.sum( numeric_only=True)
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
     graphs = [
@@ -69,6 +70,22 @@ def index():
             }
         }
     ]
+    
+    graph_one = []
+    sum_col = df.sum( numeric_only=True)
+    
+    graph_one.append(
+          gobj.Bar(
+          x = sum_col.index[1:],
+          y = sum_col.values[1:],
+          )
+      )
+    layout_one = dict(title = 'Count of each Message type',
+                xaxis = dict(title = 'Type of Message'),
+                yaxis = dict(title = 'Number of messeges'),
+                )
+    
+    graphs.append(dict(data=graph_one, layout=layout_one))
     
     # encode plotly graphs in JSON
     ids = ["graph-{}".format(i) for i, _ in enumerate(graphs)]

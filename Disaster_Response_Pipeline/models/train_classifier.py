@@ -20,9 +20,22 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
 
 def load_data(database_filepath):
+    """
+    Loads the data from the database and split them X, Y
+
+    Parameter
+    ---------
+    database_filepath : str
+        The database file path.
+
+    Returns
+    -------
+    X: DataFrame with features
+    Y: Dataframe of Labels
+    colms: Predection labels
+    """
     engine = create_engine("sqlite:///" + database_filepath)
     df = pd.read_sql_table("DataFrame",engine)
-    df["related"].replace(2, 1, inplace=True)
     df.dropna(how="any",inplace= True)
     X = df.message.values
     colms = list(df.columns)
@@ -33,6 +46,18 @@ def load_data(database_filepath):
 
 
 def tokenize(text):
+    """
+    converts the text into tokens through normalizing, removing punctuation, tokenization, removing stop words and lemmetization.
+
+    Parameter
+    ---------
+    text : str
+        text to be tokenized.
+
+    Returns
+    -------
+    lemmed: list of tokens after preporcessing.
+    """
     text = re.sub(r"[^a-zA-Z0-9]", " ", text.lower())
     text = word_tokenize(text)
     filtered_sentence = []
@@ -45,6 +70,13 @@ def tokenize(text):
 
 
 def build_model():
+    """
+    Model pipeline and GridSearch building
+
+    Returns
+    -------
+    cv: GridSearch instance.
+    """
     parameters = parameters = {
         'clf__estimator__min_samples_split': [2,3,5],
         'clf__estimator__max_features':[1, 2, 5, 10],
@@ -64,12 +96,25 @@ def build_model():
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
+    """
+    Model evaluation through classification_report
+
+    Parameter
+    ---------
+    model : model to be evaluated.
+    X_test: Data for training   
+    Y_test: Labels for training
+    category_names: List of prediction labels
+    """
     y_pred = model.predict(X_test)
     print(classification_report(Y_test.values, y_pred, target_names=category_names))
 
 
 
 def save_model(model, model_filepath):
+    """
+    saves the model to the file system.
+    """
     pickle.dump(model, open(model_filepath, 'wb'))
 
 

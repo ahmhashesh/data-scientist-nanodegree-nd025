@@ -4,6 +4,21 @@ from sqlalchemy import create_engine
 
 
 def load_data(messages_filepath, categories_filepath):
+    """
+    Loads the data from the csv files and concatenate them
+
+    Parameter
+    ---------
+    messages_filepath : str
+        The messages cvs file.
+    categories_filepath : str
+        The categories cvs file.
+
+    Returns
+    -------
+    DataFrame
+        DataFrame with data from both csvs concatenated
+    """
     messages = pd.read_csv(messages_filepath)
     categories = pd.read_csv(categories_filepath)
     df = messages.merge(categories, on= 'id')
@@ -23,10 +38,33 @@ def load_data(messages_filepath, categories_filepath):
     return df
 
 def clean_data(df):
+    """
+    removes the duplicates in the dataframe
+    Parameter
+    ---------
+    df : DataFrame
+        dataframe to be cleaned.
+        
+    Returns
+    -------
+    DataFrame
+        DataFrame with data cleaned.
+    """
     df = df[~df.duplicated()]
+    # replacing mislabled related column data with value of 2 
+    df["related"].replace(2, 1, inplace=True)
     return df
 
 def save_data(df, database_filename):
+    """
+    Creates a sqlalchemy engine and save the dataframe to it. 
+    Parameter
+    ---------
+    df : DataFrame
+        dataframe to be saved.
+    database_filename: 
+        database file name
+    """
     engine = create_engine('sqlite:///' + database_filename)
     df.to_sql('DataFrame', engine, index=False, if_exists='replace')  
 

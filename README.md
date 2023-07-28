@@ -53,6 +53,19 @@ Feel free to provide any feedback.
 
 ### Summary of the model used:
 We used the TF-IDF along with CountVectorizer as a text pipeline and then implemented a multioutput classifier using the Random Forest Classifier to predict the categories of each message.
- 
-
+### Files List:
+* app: this folder contains the web application files
+    * templates: 
+        * go.html
+        * master.html
+    * DisasterResponse.db
+    * run.py
+* data: this folder contains the database and the csv file for training
+    * disaster_categories.csv
+    * disaster_messages.csv
+    * DisasterResponse.db
+    * process_data.py
+* models: this folder containes the model pkl file and the python code for training the model.
+    * classifier.pkl
+    * train_classifier.py
 <br>
