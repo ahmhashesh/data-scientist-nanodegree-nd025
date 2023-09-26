@@ -72,7 +72,6 @@ We used the TF-IDF along with CountVectorizer as a text pipeline and then implem
 
 ## StarBucks Capstone Project
 
-
 ### Summary of the model used:
 The purpose of the project is to analyse the user behaviour and understand how the users interact with the offers.
 We used matrix multiplication to calculate the relation between the user features and different offers:
