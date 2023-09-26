@@ -69,3 +69,13 @@ We used the TF-IDF along with CountVectorizer as a text pipeline and then implem
     * classifier.pkl
     * train_classifier.py
 <br>
+## StarBucks Capstone Project
+### Summary of the model used:
+We used the TF-IDF along with CountVectorizer as a text pipeline and then implemented a multioutput classifier using the Random Forest Classifier to predict the categories of each message.
+### Files List:
+* data: this folder contains the database and the json file for training
+    * portfolio.json
+    * profile.json
+    * transcript.json
+* Starbucks_Capstone_notebook.ipynb: This is the main analysis code.
+<br>
