@@ -71,7 +71,7 @@ We used the TF-IDF along with CountVectorizer as a text pipeline and then implem
 <br>
 
 ## StarBucks Capstone Project
-
+Every few days, Starbucks share an offer with the customers on the mobile app. The purpose is to analyze the Starbucks data and understand how users interacts with the offers sent.
 ### Summary of the model used:
 The purpose of the project is to analyse the user behaviour and understand how the users interact with the offers.
 We used matrix multiplication to calculate the relation between the user features and different offers:
@@ -89,4 +89,28 @@ mat_1.T . mat_2 = user_features x offers
     * profile.json
     * transcript.json
 * Starbucks_Capstone_notebook.ipynb: This is the main analysis code.
+* requirements.txt: Python libraries needed to run the code.
+
+The code is based on python 3.8 and the following python liberaries were used in the project:
+* pandas==1.5.3
+* numpy==1.23.5
+* seaborn==0.12.2
+* matplotlib==3.3.4
+* matplotlib-inline==0.1.6
+
+You can install the requirements by using the following command:
+	``` pip install -r requirements.txt ```
+
+### Summary of the results:
+In this project, We wanted to explore customers data from Starbucks to understand the relation and users characteristics to perfectly benefit from the offers. 
+From the analysis:
+* we can see that different user segmentation can be done such as Joining date, gender, income and Age.
+* We used only dot product to combine the different info into a relation between different users and offer features. We were able to find the user-segments which maps to the higher interactions with offers.
+* We have found that Males aged between 40–80 with income between 60–80k and joined on 2017 can perform the best with both offer interaction and offer completion.
+* Further user segmentation can be used based on the provided information. No need to use a machine learning model for data prediction as the relation is simple and already clear from the heatmaps.
+
+As an improvement, I can suggest to update the data with which offer was completed for more accurate prediction on which offer would perform the best.
+
+### Citation: This project is part of Udacity Data Science Nanodegree. The data used is provided as part of the Nanodegree.
+### License: MIT License
 <br>
